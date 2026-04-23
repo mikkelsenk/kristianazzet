@@ -1,0 +1,78 @@
+---
+
+---
+
+<section class="w-full border-t border-white/10 bg-black px-4 py-24 sm:px-6 lg:px-10 xl:px-14 md:py-28">
+  <div class="mx-auto w-full max-w-5xl">
+    <form id="newsletter-form" class="flex flex-col gap-5" action="/api/newsletter" method="POST">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <input
+          type="text"
+          name="firstName"
+          placeholder="First name"
+          required
+          class="border border-white/20 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 focus:border-white focus:outline-none"
+        />
+        <input
+          type="text"
+          name="lastName"
+          placeholder="Last name"
+          required
+          class="border border-white/20 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 focus:border-white focus:outline-none"
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          class="border border-white/20 bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/40 focus:border-white focus:outline-none"
+        />
+      </div>
+      <div class="flex justify-center pt-2">
+        <button
+          type="submit"
+          class="ka-btn bg-neon-green px-12 py-4 text-black transition-colors hover:bg-white"
+        >
+          Subscribe
+        </button>
+      </div>
+      <div id="newsletter-message" class="mt-4 hidden text-center text-sm"></div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('newsletter-form') as HTMLFormElement | null;
+  const message = document.getElementById('newsletter-message');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form || !message) return;
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        message.textContent = "Thanks — you're on the list.";
+        message.className = 'mt-4 block text-center text-sm text-neon-green';
+        message.classList.remove('hidden');
+        form.reset();
+      } else {
+        message.textContent = 'Something went wrong — please try again.';
+        message.className = 'mt-4 block text-center text-sm text-red-400';
+        message.classList.remove('hidden');
+      }
+    } catch {
+      message.textContent = 'Something went wrong — please try again.';
+      message.className = 'mt-4 block text-center text-sm text-red-400';
+      message.classList.remove('hidden');
+    }
+  });
+</script>

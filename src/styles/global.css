@@ -1,0 +1,399 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Kun Geomanist — læsbar UI som fx martingarrix.com (ren sans-serif) */
+@font-face {
+  font-family: 'Geomanist';
+  src: url('/fonts/Geomanist-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geomanist';
+  src: url('/fonts/Geomanist-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Sættes i JS når menu låser scroll (erstatter scrollbars bredde i topbar-padding) */
+  --ka-sb: 0px;
+  --color-stone-black: #0a0a0a;
+  --color-stone-black-dark: #050505;
+  --color-void: #000000;
+  --color-neon-green: #dcff42;
+  --ka-line: rgba(255, 255, 255, 0.1);
+  --text-muted: rgba(255, 255, 255, 0.72);
+  --text-body: rgba(255, 255, 255, 0.92);
+}
+
+* {
+  border-radius: 0 !important;
+}
+
+*[class*="rounded-full"],
+.rounded-full {
+  border-radius: 9999px !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #000000;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Reducer layout-shift når body får overflow:hidden (menu) — suppleres med padding i JS */
+  scrollbar-gutter: stable;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: 'Geomanist', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: #000000;
+  color: var(--text-body);
+}
+
+/* Alle overskrifter: samme stærke sans — ingen dekorativ display-font der slugger læsbarhed */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Geomanist', system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  text-rendering: optimizeLegibility;
+}
+
+.font-display {
+  font-family: 'Geomanist', system-ui, sans-serif;
+  font-weight: 700;
+}
+
+.font-sans {
+  font-family: 'Geomanist', system-ui, sans-serif;
+}
+
+/* Sektions-etiketter: stadig caps, men større og mere læsbare end før */
+.ka-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ka-label--accent {
+  color: var(--color-neon-green);
+  opacity: 1;
+}
+
+/*
+ * Primære CTA-knapper — 20px caps (tydeligere end 12px; 28px fylder for meget i footer/kort).
+ * Brug sammen med eksisterende farver / padding (fx text-black, px-12 py-4).
+ */
+.ka-btn {
+  font-size: 1.25rem;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: 'Geomanist', system-ui, sans-serif;
+}
+
+::selection {
+  background-color: #dcff42;
+  color: #000000;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #dcff42;
+  outline-offset: 0;
+}
+
+.transition-default {
+  transition: all 0.2s ease;
+}
+
+.border-subtle {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.border-subtle-strong {
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+/* Subtil film grain */
+.noise-overlay {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.75rem);
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-reveal].reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-ken,
+  .animate-marquee,
+  .animate-scroll-hint,
+  .animate-fade-up {
+    animation: none !important;
+  }
+  .hero-bg-static {
+    transform: none !important;
+  }
+  .animate-fade-up {
+    opacity: 1 !important;
+  }
+}
+
+#firmafest-nav.is-scrolled {
+  background-color: rgba(0, 0, 0, 0.92);
+  border-bottom: 1px solid var(--ka-line);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* Fullscreen menu: ingen opacity-fade — undgår “dobbelt” header og mikro-hop under animation */
+.ka-menu-overlay {
+  opacity: 1;
+  visibility: hidden;
+  pointer-events: none;
+  transition: none;
+}
+
+.ka-menu-overlay.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Topbar må ikke fade ind — undgår at logo ser ud til at flytte sig */
+.ka-menu-topbar {
+  transform: translateY(0);
+  opacity: 1;
+  transition: none;
+}
+
+.ka-menu-overlay.is-open .ka-menu-topbar {
+  opacity: 1;
+}
+
+.ka-menu-panel {
+  transform: translateX(22px);
+  opacity: 0;
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 300ms ease;
+}
+
+.ka-menu-overlay.is-open .ka-menu-panel {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Sticky header: auto-contrast over enhver baggrund */
+.ka-header--invert {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Solid modes: ingen blend (JS toggler classes) */
+.ka-nav-mode--solid-light .ka-header-invert,
+.ka-nav-mode--solid-dark .ka-header-invert {
+  mix-blend-mode: normal;
+}
+
+/* Over alt andet end sort/hvid: “exclusion” look */
+.ka-nav-mode--blend .ka-header-invert {
+  mix-blend-mode: exclusion;
+}
+
+/* Menu hover states (MG-ish): aktivt link + dim de andre + hvid underline */
+.ka-menu-list .ka-menu-item {
+  position: relative;
+}
+
+.ka-menu-list .ka-menu-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.9);
+  opacity: 0;
+  transform: scaleX(0);
+  /* Default: træk tilbage fra venstre → højre (når active fjernes) */
+  transform-origin: left center;
+  transition:
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 240ms ease;
+  pointer-events: none;
+}
+
+/* Når menuen er i hover-tilstand, hold stregen “tændt”, men skaler den ind/ud. */
+.ka-menu-list.is-dimmed .ka-menu-item::after {
+  opacity: 1;
+}
+
+.ka-menu-list.is-dimmed .ka-menu-item {
+  opacity: 0.34;
+  transition: opacity 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ka-menu-list.is-dimmed .ka-menu-item.is-active {
+  opacity: 1;
+}
+
+.ka-menu-list.is-dimmed .ka-menu-item.is-active::after {
+  /* Active: fyld fra højre → venstre */
+  transform-origin: right center;
+  transform: scaleX(1);
+}
+
+/*
+ * Samme højde/bredde til højre kontrol i header og overlay — ellers matcher bundstregen ikke.
+ */
+.ka-menu-toggle__slot {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: 10.5rem;
+  height: 2.25rem;
+}
+
+.ka-menu-topbar-close-slot {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-end;
+  width: 10.5rem;
+  height: 2.25rem;
+}
+
+@media (min-width: 768px) {
+  .ka-menu-toggle__slot,
+  .ka-menu-topbar-close-slot {
+    width: 11.5rem;
+    height: 2.5rem;
+  }
+}
+
+.ka-menu-toggle .ka-menu-hamburger,
+.ka-menu-toggle .ka-menu-close {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  white-space: nowrap;
+  transition: opacity 200ms ease;
+  transform: translateY(-50%);
+}
+
+.ka-menu-toggle .ka-menu-close {
+  opacity: 0;
+}
+
+.ka-menu-toggle.is-open .ka-menu-hamburger {
+  opacity: 0;
+}
+
+.ka-menu-toggle.is-open .ka-menu-close {
+  opacity: 1;
+}
+
+/* Morph-feel: hamburger lines → kryds (mens label fader ud) */
+.ka-menu-toggle .ka-burger-line {
+  transform-origin: 50% 50%;
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 180ms ease;
+}
+
+.ka-menu-toggle.is-open .ka-burger-line--a {
+  transform: translateY(4.5px) rotate(45deg);
+}
+
+.ka-menu-toggle.is-open .ka-burger-line--b {
+  transform: translateY(-4.5px) rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ka-menu-overlay,
+  .ka-menu-topbar,
+  .ka-menu-panel,
+  .ka-menu-toggle .ka-menu-hamburger,
+  .ka-menu-toggle .ka-menu-close {
+    transition: none !important;
+    visibility: visible !important;
+  }
+
+  .ka-menu-overlay:not(.is-open) {
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .ka-menu-toggle .ka-menu-hamburger,
+  .ka-menu-toggle .ka-menu-close {
+    transform: translateY(-50%) !important;
+  }
+
+  .ka-menu-toggle:not(.is-open) .ka-menu-close {
+    opacity: 0 !important;
+  }
+
+  .ka-menu-toggle.is-open .ka-menu-hamburger {
+    opacity: 0 !important;
+  }
+}

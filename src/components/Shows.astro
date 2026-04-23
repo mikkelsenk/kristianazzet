@@ -1,0 +1,29 @@
+---
+import ShowCard from './ShowCard.astro';
+import { getShows } from '../lib/sanity';
+
+const shows = await getShows();
+
+const sorted = [...shows].sort(
+  (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+);
+---
+
+<section
+  id="shows"
+  class="scroll-mt-24 w-full bg-black px-4 py-24 sm:px-6 lg:px-10 xl:px-14 md:py-32"
+>
+  <div class="w-full">
+    {sorted.length === 0 ? (
+      <div class="border border-white/10 bg-[#111] p-12 text-center text-base text-white/65">
+        No upcoming shows right now. Check back soon.
+      </div>
+    ) : (
+      <div class="border-x border-b border-white/10 bg-[#0d0d0d] px-4 md:px-10 lg:px-14">
+        {sorted.map((show) => (
+          <ShowCard show={show} />
+        ))}
+      </div>
+    )}
+  </div>
+</section>

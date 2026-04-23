@@ -1,0 +1,65 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  videoUrl?: string;
+  thumbnailUrl?: string;
+  /** Section element id (e.g. video on home, music on /music) */
+  sectionId?: string;
+}
+
+const {
+  title = 'SMUKFEST 2022',
+  subtitle = 'AUG 2, TUE',
+  videoUrl = '',
+  thumbnailUrl = '',
+  sectionId = 'video',
+} = Astro.props;
+
+const safeVideoUrl = typeof videoUrl === 'string' ? videoUrl.trim() : '';
+---
+
+{
+  safeVideoUrl ? (
+    <section
+      id={sectionId}
+      class="w-full border-t border-white/10 bg-black px-4 py-24 sm:px-6 lg:px-10 xl:px-14 md:py-28"
+    >
+      <div class="w-full">
+        <a
+          href={safeVideoUrl}
+          target="_blank"
+          rel="noopener"
+          class="group relative block aspect-video overflow-hidden border-2 border-white/90 bg-neutral-900"
+          style={thumbnailUrl
+            ? `background-image: url(${thumbnailUrl}); background-size: cover; background-position: center;`
+            : 'background: linear-gradient(145deg, #1c1c1c 0%, #000 100%);'}
+        >
+          <div class="absolute inset-0 bg-black/25 transition-colors group-hover:bg-black/45"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div
+              class="flex h-16 w-16 items-center justify-center bg-white text-black transition-transform group-hover:scale-105 md:h-20 md:w-20"
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="ml-1">
+                <path d="M8 5v14l11-7z"></path>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <div class="mt-8 grid gap-6 border-t border-white/10 pt-8 text-sm md:grid-cols-3 md:text-base">
+          <div>
+            <p class="font-bold uppercase tracking-wide text-white">{title}</p>
+            <p class="mt-1 text-white/65">{subtitle}</p>
+          </div>
+          <div class="md:text-center">
+            <p class="font-semibold uppercase tracking-wide text-neon-green">Livecamp</p>
+          </div>
+          <div class="md:text-right">
+            <p class="font-bold uppercase tracking-wide text-white">Kristian Azzet</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  ) : null
+}

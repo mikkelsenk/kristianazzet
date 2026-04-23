@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+import { siteConfig } from '../config/site';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+  ogImage?: string;
+}
+
+const {
+  title = siteConfig.name,
+  description = siteConfig.description,
+  noindex = false,
+  ogImage = '/images/og-default.jpg',
+} = Astro.props;
+
+const fullTitle = title === siteConfig.name ? title : `${title} — ${siteConfig.name}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/images/ICON_-_HVID.svg" />
+
+    <!-- Font preload — Geomanist only -->
+    <link rel="preload" href="/fonts/Geomanist-Regular.otf" as="font" type="font/otf" crossorigin />
+    <link rel="preload" href="/fonts/Geomanist-Bold.otf" as="font" type="font/otf" crossorigin />
+
+    <meta name="theme-color" content="#000000" />
+
+    <slot name="head" />
+  </head>
+  <body class="bg-black font-sans text-white antialiased">
+    <slot />
+  </body>
+</html>

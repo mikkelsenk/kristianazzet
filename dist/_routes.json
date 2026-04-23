@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "include": [
+    "/*"
+  ],
+  "exclude": [
+    "/",
+    "/_astro/*",
+    "/robots.txt",
+    "/fonts/*",
+    "/images/*",
+    "/contact",
+    "/cookies",
+    "/firmafest",
+    "/music",
+    "/privacy",
+    "/shows",
+    "/terms"
+  ]
+}

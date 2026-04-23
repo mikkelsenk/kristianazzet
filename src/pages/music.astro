@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import FeaturedVideo from '../components/FeaturedVideo.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Music"
+  description="Music, video, and releases from Kristian Azzet."
+>
+  <Nav transparent={true} />
+  <main class="pt-20 md:pt-24">
+    <FeaturedVideo sectionId="music" />
+  </main>
+  <Footer />
+</BaseLayout>

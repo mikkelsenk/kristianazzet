@@ -1,0 +1,46 @@
+[
+  {
+    "id": "1",
+    "venue": "Maskinfabrikken",
+    "date": "2024-09-14",
+    "city": "Skanderborg",
+    "country": "Denmark",
+    "address": "Vroldvej 49, 8660 Skanderborg",
+    "ticketUrl": "https://example.com/tickets",
+    "status": "upcoming",
+    "featured": false
+  },
+  {
+    "id": "2",
+    "venue": "Train",
+    "date": "2024-11-22",
+    "city": "Aarhus",
+    "country": "Denmark",
+    "address": "Toldbodgade 6, 8000 Aarhus C",
+    "ticketUrl": "https://example.com/tickets",
+    "status": "upcoming",
+    "featured": false
+  },
+  {
+    "id": "3",
+    "venue": "Tivoli Congress Center",
+    "date": "2024-12-07",
+    "city": "København",
+    "country": "Denmark",
+    "address": "Arni Magnussons Gade 2",
+    "ticketUrl": "https://example.com/tickets",
+    "status": "soldout",
+    "featured": false
+  },
+  {
+    "id": "4",
+    "venue": "Private Event — NYE",
+    "date": "2024-12-31",
+    "city": "Ibiza",
+    "country": "Spain",
+    "address": "Location revealed to guests",
+    "ticketUrl": null,
+    "status": "private",
+    "featured": false
+  }
+]

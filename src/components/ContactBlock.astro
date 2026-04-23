@@ -1,0 +1,319 @@
+---
+import { siteConfig } from '../config/site';
+---
+
+<section
+  id="contact"
+  data-nav-tone="light"
+  class="w-full bg-white px-4 pb-20 pt-28 text-black sm:px-6 md:pb-24 md:pt-32 lg:px-10 xl:px-14"
+>
+  <div class="mx-auto w-full max-w-[min(100%,90rem)]">
+    <div class="relative grid gap-10 lg:grid-cols-12 lg:items-start">
+      <div class="pointer-events-none absolute inset-y-0 left-1/2 hidden -translate-x-1/2 select-none lg:block" aria-hidden="true">
+        <span class="ka-contact-giant font-display">CONTACT</span>
+      </div>
+
+      <!-- Venstre: headline -->
+      <div class="lg:col-span-5 lg:pr-10">
+        <h1 class="font-display text-4xl font-bold uppercase leading-[0.95] tracking-tight sm:text-5xl md:text-6xl">
+          How can<br />we help<br />you?
+        </h1>
+        <p class="mt-6 max-w-md text-sm leading-relaxed text-black/70 md:text-base">
+          For at gøre det nemt at svare hurtigt, vælg først hvem du er og hvad henvendelsen handler om.
+        </p>
+        <div class="mt-10 flex items-center gap-4 text-xs uppercase tracking-[0.18em] text-black/70">
+          <span class="h-px w-10 bg-black/35"></span>
+          <span>Team Kristian Azzet</span>
+        </div>
+      </div>
+
+      <!-- Højre: intent-first flow -->
+      <div class="lg:col-span-7 lg:pl-10">
+        <div class="ka-contact-card border border-black/15 bg-white p-6 sm:p-8">
+          <!-- Step 1 -->
+          <div data-step="1">
+            <div class="grid gap-6">
+              <label class="grid gap-2">
+                <span class="text-xs font-semibold uppercase tracking-[0.18em] text-black/70">I am a</span>
+                <select class="ka-contact-input" name="role" data-role>
+                  <option value="">Describe yourself</option>
+                  <option value="booking-agent">Booking agent</option>
+                  <option value="press-agent">Press agent</option>
+                  <option value="artist-pro">Musician / professional</option>
+                  <option value="fan">Fan</option>
+                  <option value="brand">Brand / company</option>
+                </select>
+              </label>
+
+              <label class="grid gap-2">
+                <span class="text-xs font-semibold uppercase tracking-[0.18em] text-black/70">Here to</span>
+                <select class="ka-contact-input" name="intent" data-intent disabled>
+                  <option value="">Select inquiry</option>
+                </select>
+              </label>
+
+              <button
+                type="button"
+                class="ka-contact-primary-btn mt-1 h-12 w-full border border-black/20 bg-black px-6 text-xs font-bold uppercase tracking-[0.22em] text-white transition-colors hover:bg-black/90 disabled:cursor-not-allowed disabled:opacity-40"
+                data-next
+                disabled
+              >
+                Get started
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div data-step="2" hidden>
+            <button
+              type="button"
+              class="mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-black/60 hover:text-black"
+              data-back
+            >
+              <span aria-hidden="true">←</span>
+              Back to contact
+            </button>
+
+            <form class="grid gap-4" onsubmit="return false;" data-contact-form>
+              <div class="grid gap-4 md:grid-cols-2">
+                <label class="grid gap-2">
+                  <span class="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-black/70">First name</span>
+                  <input class="ka-contact-input" name="firstName" type="text" autocomplete="given-name" placeholder="First Name" />
+                </label>
+                <label class="grid gap-2">
+                  <span class="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-black/70">Last name</span>
+                  <input class="ka-contact-input" name="lastName" type="text" autocomplete="family-name" placeholder="Last Name" />
+                </label>
+              </div>
+
+              <div class="grid gap-4 md:grid-cols-2">
+                <label class="grid gap-2">
+                  <span class="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-black/70">Email address</span>
+                  <input class="ka-contact-input" name="email" type="email" autocomplete="email" placeholder="Email Address" />
+                </label>
+                <label class="grid gap-2">
+                  <span class="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-black/70">Company <span class="normal-case font-normal text-black/40">(optional)</span></span>
+                  <input class="ka-contact-input" name="company" type="text" autocomplete="organization" placeholder="Company" />
+                </label>
+              </div>
+
+              <div class="grid gap-4 md:grid-cols-2">
+                <label class="grid gap-2">
+                  <span class="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-black/70">Country</span>
+                  <input class="ka-contact-input" name="country" type="text" autocomplete="country-name" placeholder="Select your country" />
+                </label>
+                <label class="grid gap-2">
+                  <span class="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-black/70">Topic</span>
+                  <input class="ka-contact-input" name="topic" type="text" placeholder="Topic" />
+                </label>
+              </div>
+
+              <label class="grid gap-2">
+                <span class="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-black/70">Message</span>
+                <textarea class="ka-contact-input ka-contact-textarea" name="message" rows="5" placeholder="Message"></textarea>
+              </label>
+
+              <button
+                type="button"
+                class="ka-contact-primary-btn h-12 w-full border border-black/20 bg-black px-6 text-xs font-bold uppercase tracking-[0.22em] text-white transition-colors hover:bg-black/90"
+                data-send
+              >
+                Send message
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="mt-8 grid gap-3 text-xs text-black/60 sm:grid-cols-2">
+          <a class="underline decoration-black/20 underline-offset-4 hover:decoration-black/50" href={`mailto:${siteConfig.booking.email}`}>
+            {siteConfig.booking.email}
+          </a>
+          <a class="underline decoration-black/20 underline-offset-4 hover:decoration-black/50" href={`tel:${siteConfig.booking.phone.replace(/\\s+/g, '')}`}>
+            {siteConfig.booking.phone}
+          </a>
+        </div>
+
+        <!-- Bottom visuals: plads til personlige billeder (kan skiftes til rigtige assets senere) -->
+        <div class="mt-12 grid gap-4 sm:grid-cols-2">
+          <div class="ka-contact-photo-frame aspect-[4/3] border border-black/15 bg-[linear-gradient(135deg,rgba(0,0,0,0.06),rgba(0,0,0,0.02))]">
+            <div class="ka-contact-photo-watermark" aria-hidden="true"></div>
+          </div>
+          <div class="ka-contact-photo-frame aspect-[4/3] border border-black/15 bg-[linear-gradient(135deg,rgba(0,0,0,0.04),rgba(0,0,0,0.01))]">
+            <div class="ka-contact-photo-watermark" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.getElementById('contact');
+  if (!root) {}
+
+  const step1 = root?.querySelector('[data-step=\"1\"]');
+  const step2 = root?.querySelector('[data-step=\"2\"]');
+  const roleSel = root?.querySelector('[data-role]');
+  const intentSel = root?.querySelector('[data-intent]');
+  const nextBtn = root?.querySelector('[data-next]');
+  const backBtn = root?.querySelector('[data-back]');
+  const sendBtn = root?.querySelector('[data-send]');
+  const form = root?.querySelector('[data-contact-form]');
+
+  const intents = {
+    'artist-pro': [
+      { v: 'hear-music', l: 'Let you hear my music' },
+      { v: 'copyright', l: 'Ask about copyright / use of music' },
+      { v: 'studio', l: 'Rent a recording studio' },
+    ],
+    'booking-agent': [
+      { v: 'book', l: 'Book Kristian Azzet' },
+      { v: 'availability', l: 'Ask about availability' },
+      { v: 'rates', l: 'Ask about rates' },
+    ],
+    'press-agent': [
+      { v: 'proposal', l: 'Send a business proposal' },
+      { v: 'invite', l: 'Invite Kristian Azzet' },
+      { v: 'copyright', l: 'Ask about copyright / use of music' },
+      { v: 'press', l: 'Press request' },
+    ],
+    fan: [
+      { v: 'hello', l: 'Say hello' },
+      { v: 'shows', l: 'Ask about shows' },
+      { v: 'merch', l: 'Ask about merch / merchandise' },
+      { v: 'copyright', l: 'Ask about copyright / use of music' },
+      { v: 'request', l: 'Personal request' },
+      { v: 'jobs', l: 'Jobs — internships (stages)' },
+    ],
+    brand: [
+      { v: 'booking', l: 'Book for event' },
+      { v: 'collab', l: 'Brand collaboration' },
+      { v: 'licensing', l: 'Licensing / use of music' },
+    ],
+  };
+
+  function setStep(n) {
+    if (!step1 || !step2) return;
+    if (n === 1) {
+      step1.hidden = false;
+      step2.hidden = true;
+    } else {
+      step1.hidden = true;
+      step2.hidden = false;
+    }
+  }
+
+  function resetIntentOptions(role) {
+    if (!intentSel || !nextBtn) return;
+    const list = intents[role] || [];
+    intentSel.innerHTML = '<option value=\"\">Select inquiry</option>' + list.map((o) => `<option value=\"${o.v}\">${o.l}</option>`).join('');
+    intentSel.disabled = list.length === 0;
+    nextBtn.disabled = true;
+  }
+
+  roleSel?.addEventListener('change', (e) => {
+    const role = e.target?.value || '';
+    resetIntentOptions(role);
+  });
+
+  intentSel?.addEventListener('change', (e) => {
+    const v = e.target?.value || '';
+    if (nextBtn) nextBtn.disabled = !v;
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    setStep(2);
+  });
+
+  backBtn?.addEventListener('click', () => {
+    setStep(1);
+  });
+
+  sendBtn?.addEventListener('click', () => {
+    if (!form) return;
+    const fd = new FormData(form);
+    const first = String(fd.get('firstName') || '').trim();
+    const last = String(fd.get('lastName') || '').trim();
+    const email = String(fd.get('email') || '').trim();
+    const company = String(fd.get('company') || '').trim();
+    const country = String(fd.get('country') || '').trim();
+    const topic = String(fd.get('topic') || '').trim();
+    const message = String(fd.get('message') || '').trim();
+    const role = roleSel?.value || '';
+    const intent = intentSel?.value || '';
+    const subject = encodeURIComponent(`Contact — ${role || 'inquiry'} / ${intent || 'message'}`);
+    const body = encodeURIComponent(
+      [
+        message || '',
+        '',
+        '---',
+        `Role: ${role || '-'}`,
+        `Intent: ${intent || '-'}`,
+        `Name: ${(first + ' ' + last).trim() || '-'}`,
+        `Email: ${email || '-'}`,
+        `Company: ${company || '-'}`,
+        `Country: ${country || '-'}`,
+        `Topic: ${topic || '-'}`,
+      ].join('\\n')
+    );
+    window.location.href = `mailto:${siteConfig.booking.email}?subject=${subject}&body=${body}`;
+  });
+
+  // init
+  resetIntentOptions('');
+  setStep(1);
+</script>
+
+<style>
+  .ka-contact-giant {
+    display: block;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: clamp(7rem, 12.5vw, 13rem);
+    letter-spacing: -0.09em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.14);
+    text-stroke: 1px rgba(0, 0, 0, 0.14);
+    line-height: 0.9;
+  }
+
+  .ka-contact-card {
+    box-shadow: 0 40px 90px rgba(0, 0, 0, 0.08);
+  }
+
+  .ka-contact-input {
+    height: 48px;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    background: #fff;
+    padding: 0 14px;
+    font-size: 14px;
+    color: #000;
+    outline: none;
+  }
+
+  .ka-contact-input:focus {
+    border-color: rgba(0, 0, 0, 0.45);
+  }
+
+  .ka-contact-textarea {
+    height: auto;
+    padding: 12px 14px;
+  }
+
+  .ka-contact-photo-frame {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ka-contact-photo-watermark {
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    background-image: url('/images/MAIN_LOGO_-_SORT.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: min(72%, 460px);
+    filter: grayscale(1);
+  }
+</style>

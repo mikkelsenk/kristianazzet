@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import RollingLocations from '../components/RollingLocations.astro';
+import SpotlightStory from '../components/SpotlightStory.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Kristian Azzet"
+  description="DJ Kristian Azzet — experience the house revolution. Book for festivals, clubs, and private events."
+>
+  <Nav transparent={true} />
+  <Hero />
+  <RollingLocations />
+  <SpotlightStory />
+  <Footer />
+</BaseLayout>

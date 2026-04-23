@@ -1,0 +1,74 @@
+---
+export interface Show {
+  id: string;
+  venue: string;
+  date: string;
+  city: string;
+  country: string;
+  address: string;
+  ticketUrl?: string | null;
+  status?: 'upcoming' | 'soldout' | 'private';
+}
+
+export interface Props {
+  show: Show;
+}
+
+const { show } = Astro.props;
+
+const dateObj = new Date(show.date);
+const month = dateObj.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+const dateLine = `${month} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
+
+const isSoldOut = show.status === 'soldout';
+const isPrivate = show.status === 'private';
+const isOpaque = isSoldOut;
+---
+
+<article
+  class:list={[
+    'flex flex-col gap-6 border-b border-white/10 py-8 last:border-b-0 md:flex-row md:items-center md:justify-between md:gap-10 md:py-10',
+    { 'opacity-50': isOpaque },
+  ]}
+>
+  <div class="min-w-0 flex-1 text-left">
+    <p class="text-xs font-medium uppercase tracking-wide text-white/70 md:text-sm">
+      {dateLine}
+    </p>
+    <h3 class="mt-2 font-display text-xl uppercase tracking-tight text-white md:text-2xl lg:text-3xl">
+      {show.venue}
+    </h3>
+    <p class="mt-2 text-sm text-white/65 md:text-base">
+      {show.city}, {show.country}
+    </p>
+    {show.address && (
+      <p class="mt-1 truncate text-xs text-white/45 md:text-sm">{show.address}</p>
+    )}
+  </div>
+
+  <div class="shrink-0 md:ml-4">
+    {isSoldOut && (
+      <div class="inline-flex border border-white/25 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white/50 md:text-base">
+        Udsolgt
+      </div>
+    )}
+    {isPrivate && (
+      <div class="inline-flex px-6 py-3 text-sm font-bold uppercase tracking-wide text-white/50 md:text-base">Private</div>
+    )}
+    {!isSoldOut && !isPrivate && show.ticketUrl && (
+      <a
+        href={show.ticketUrl}
+        target="_blank"
+        rel="noopener"
+        class="ka-btn inline-flex min-w-[160px] items-center justify-center bg-neutral-300 px-8 py-3.5 text-black transition-colors hover:bg-white"
+      >
+        Billetter
+      </a>
+    )}
+    {!isSoldOut && !isPrivate && !show.ticketUrl && (
+      <div class="inline-flex border border-white/20 px-6 py-3.5 text-sm font-bold uppercase tracking-wide text-white/45 md:text-base">
+        TBA
+      </div>
+    )}
+  </div>
+</article>

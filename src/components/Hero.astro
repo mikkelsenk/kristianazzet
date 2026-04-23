@@ -1,0 +1,113 @@
+---
+import { siteConfig } from '../config/site';
+
+export interface Props {
+  headline?: string;
+  backgroundImage?: string;
+}
+
+const {
+  headline = 'EXPERIENCE THE HOUSE<br/>REVOLUTION',
+  backgroundImage = '/images/Azzet_promo_billeder___jakob_birkedal___farver__clean-52-2769b5f8-d83d-496a-b569-1c10a5a2f1f7.png',
+} = Astro.props;
+
+const listenHref = siteConfig.music.spotify || siteConfig.music.soundcloud || 'https://open.spotify.com';
+---
+
+<section
+  data-nav-tone="blend"
+  class="relative flex h-[100dvh] min-h-[100dvh] w-full flex-col items-center justify-center overflow-hidden px-4 pb-32 pt-24 text-center sm:px-6 md:pb-28 md:pt-28 lg:px-10 xl:px-14"
+>
+  <div class="absolute inset-0 -z-10 overflow-hidden bg-black">
+    <!-- Brug <img> i stedet for CSS background-image (mere robust end url()-string) -->
+    <img
+      src={backgroundImage}
+      alt=""
+      width="2400"
+      height="1600"
+      class="hero-bg-static absolute inset-0 h-full w-full object-cover object-center will-change-transform motion-reduce:animate-none animate-hero-ken"
+      loading="eager"
+      decoding="async"
+      aria-hidden="true"
+    />
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <!-- Tuned for photo hero: let image read clearly -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/18 via-black/0 to-black/58"></div>
+    <div
+      class="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_20%,rgba(220,255,66,0.06),transparent_50%)]"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="absolute inset-0 bg-[radial-gradient(ellipse_120%_90%_at_50%_100%,rgba(0,0,0,0.56),transparent_55%)]"
+      aria-hidden="true"
+    ></div>
+  </div>
+
+  <div class="relative z-10 mx-auto w-full max-w-[min(100%,90rem)] px-2 sm:px-4">
+    <h1
+      class="animate-fade-up text-balance font-display uppercase leading-[0.95] tracking-tight text-5xl opacity-0 [text-shadow:0_4px_60px_rgba(0,0,0,0.9)] sm:text-6xl md:text-7xl md:leading-[0.93] lg:text-8xl"
+      style="animation-delay: 0.08s"
+      set:html={headline}
+    />
+
+    <!-- Primær CTA: hvid boks / sort tekst — som Garrix "LISTEN NOW" -->
+    <div
+      class="mb-10 mt-12 flex animate-fade-up flex-col items-center gap-5 opacity-0 sm:flex-row sm:justify-center sm:gap-6"
+      style="animation-delay: 0.2s"
+    >
+      <a
+        href={listenHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="ka-btn inline-flex min-w-[200px] items-center justify-center bg-white px-12 py-4 text-black transition-colors hover:bg-neutral-200"
+      >
+        Listen
+      </a>
+      <a
+        href="/contact"
+        class="ka-btn inline-flex min-w-[200px] items-center justify-center border border-white/60 bg-transparent px-12 py-4 text-white transition-colors hover:bg-white hover:text-black"
+      >
+        Booking
+      </a>
+    </div>
+
+    <div
+      class="flex animate-fade-up items-center justify-center gap-6 text-white opacity-0"
+      style="animation-delay: 0.3s"
+    >
+      <a href="https://linkedin.com/in/kristianazzet" aria-label="LinkedIn" class="opacity-90 transition-opacity hover:opacity-100">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.5 18v-8h-2v8h2zM7.5 8.5a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5zM18 18v-4.4c0-2.3-1.25-3.4-2.9-3.4-1.35 0-1.95.75-2.3 1.3V10h-2v8h2v-4.5c0-.95.7-1.5 1.55-1.5.8 0 1.4.5 1.4 1.5V18h2.25z"/></svg>
+      </a>
+      <a href="https://x.com/kristianazzet" aria-label="X" class="opacity-90 transition-opacity hover:opacity-100">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://youtube.com/@kristianazzet" aria-label="YouTube" class="opacity-90 transition-opacity hover:opacity-100">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+      </a>
+      <a href="https://facebook.com/kristianazzet" aria-label="Facebook" class="opacity-90 transition-opacity hover:opacity-100">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7V12h3.1V9.4c0-3.1 1.8-4.8 4.6-4.8 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.3l-.5 3.5h-2.8v8.4A12 12 0 0 0 24 12z"/></svg>
+      </a>
+      <a href="https://instagram.com/kristianazzet" aria-label="Instagram" class="opacity-90 transition-opacity hover:opacity-100">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="0"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://tiktok.com/@kristianazzet" aria-label="TikTok" class="opacity-90 transition-opacity hover:opacity-100">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.3 5.8c-1.7 0-3.1-1.4-3.1-3.1V2.5h-3.5v13.1a2.7 2.7 0 1 1-1.9-2.6V9.5a6.2 6.2 0 1 0 5.4 6.1V8.9c1.3.9 2.9 1.5 4.6 1.5v-3.5c-.5 0-1-.4-1.5-1.1z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll: "SCROLL DOWN" + markør + pil (reference: martingarrix.com) -->
+  <a
+    href="#locations"
+    class="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-4 text-center md:bottom-12"
+    aria-label="Scroll to tour section"
+  >
+    <span class="text-xs font-bold uppercase tracking-[0.2em] text-white md:text-sm">Scroll down</span>
+    <span class="text-lg font-light leading-none text-white" aria-hidden="true">×</span>
+    <span class="text-neutral-500" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto">
+        <path d="M6 9l6 6 6-6" />
+      </svg>
+    </span>
+  </a>
+</section>

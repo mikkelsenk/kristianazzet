@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Booking, press, and contact for DJ Kristian Azzet."
+>
+  <Nav transparent={true} tone="light" />
+  <main>
+    <ContactBlock />
+  </main>
+  <Footer />
+</BaseLayout>
