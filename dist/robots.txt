@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /firmafest
-Disallow: /api/
-
-Sitemap: https://kristianazzet.com/sitemap.xml
