@@ -1,60 +1,25 @@
 ---
-import { getSiteSettings, urlFor } from '../lib/sanity';
 import { siteConfig } from '../config/site';
 
 type LocationItem = {
   label: string;
-  image?: any;
 };
-
-const settings = await getSiteSettings();
-
-const sanityItems: LocationItem[] =
-  (settings?.rollingLocations || []).filter((x: any) => typeof x?.label === 'string' && x.label.trim().length > 0);
 
 const fallbackItems: LocationItem[] = siteConfig.tourLocations.flatMap((x) => [
   { label: x.country },
   ...x.cities.map((c) => ({ label: c })),
 ]);
 
-const items: LocationItem[] = sanityItems.length ? sanityItems : fallbackItems;
+const items: LocationItem[] = fallbackItems;
 
-function imgUrl(item: LocationItem) {
-  if (!item?.image) return '';
-  try {
-    return urlFor(item.image).width(1800).quality(80).auto('format').url();
-  } catch {
-    return '';
-  }
-}
-
-function imageFromRef(ref: any) {
-  if (!ref) return '';
-  try {
-    return urlFor(ref).width(2400).quality(82).auto('format').url();
-  } catch {
-    return '';
-  }
-}
-
-/** Standard baggrund: dit AVIF i repo. Sanity “Locations standard baggrund” kan stadig overskrive. */
+/** Standard baggrund: dit AVIF i repo. */
 const LOCATIONS_BG_AVIF = '/images/locations-bg.avif';
 
-const idleBgUrl =
-  imageFromRef(settings?.locationsIdleBackground) || LOCATIONS_BG_AVIF;
+const idleBgUrl = LOCATIONS_BG_AVIF;
 
-const sectionLabel = String(settings?.locationsSectionLabel ?? 'TOUR').trim() || 'TOUR';
+const sectionLabel = 'TOUR';
 
-// Unikke hover-billeder (som MG: .hovered-event-image med stablede <img>)
 const hoverImageUrls: string[] = [];
-const seenUrl = new Set<string>();
-for (const item of items) {
-  const u = imgUrl(item);
-  if (u && !seenUrl.has(u)) {
-    seenUrl.add(u);
-    hoverImageUrls.push(u);
-  }
-}
 
 // Tre rækker
 const r1 = items.filter((_, i) => i % 3 === 0);
@@ -91,18 +56,7 @@ const loops = Array.from({ length: loopCount }, (_, i) => i);
         aria-hidden="true"
       ></div>
       <div class="ka-loc-hovered-event-image ka-loc-hover-stack" aria-hidden="true">
-        {hoverImageUrls.map((url) => (
-          <img
-            src={url}
-            alt=""
-            width="808"
-            height="556"
-            class="ka-loc-hover-img"
-            data-hover-src={url}
-            loading="lazy"
-            decoding="async"
-          />
-        ))}
+        {hoverImageUrls.map(() => null)}
       </div>
     </div>
 
@@ -124,7 +78,7 @@ const loops = Array.from({ length: loopCount }, (_, i) => i);
                     type="button"
                     class="ka-outline ka-loc-event-title"
                     data-loc
-                    data-bg={imgUrl(item)}
+                    data-bg=""
                   >
                     {item.label}
                   </button>
@@ -143,7 +97,7 @@ const loops = Array.from({ length: loopCount }, (_, i) => i);
                     type="button"
                     class="ka-outline ka-loc-event-title"
                     data-loc
-                    data-bg={imgUrl(item)}
+                    data-bg=""
                   >
                     {item.label}
                   </button>
@@ -162,7 +116,7 @@ const loops = Array.from({ length: loopCount }, (_, i) => i);
                     type="button"
                     class="ka-outline ka-loc-event-title"
                     data-loc
-                    data-bg={imgUrl(item)}
+                    data-bg=""
                   >
                     {item.label}
                   </button>
@@ -489,7 +443,7 @@ const loops = Array.from({ length: loopCount }, (_, i) => i);
       : 0.3;
 
     /** Marquee: langsom ved hover via playbackRate — én zone for alle rækker (undgår hak række → række). */
-    const setAllPlayback = (rate) => {
+    const setAllPlayback = (rate: number) => {
       root.querySelectorAll('.ka-marquee__track').forEach((track) => {
         for (const anim of track.getAnimations()) {
           anim.playbackRate = rate;
@@ -503,7 +457,7 @@ const loops = Array.from({ length: loopCount }, (_, i) => i);
 
     const hoverImgs = root.querySelectorAll('.ka-loc-hover-img');
 
-    const setHover = (url) => {
+    const setHover = (url: string) => {
       hoverImgs.forEach((img) => {
         const src = img.getAttribute('data-hover-src') || '';
         img.classList.toggle('is-on', Boolean(url) && src === url);

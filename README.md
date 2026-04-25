@@ -1,13 +1,12 @@
 # kristianazzet.com
 
-Astro + React + Tailwind site deployet på Cloudflare Pages med Sanity CMS til content management.
+Astro + React + Tailwind site deployet på Cloudflare Pages.
 
 ## Stack
 
 - **Astro 4** — statisk site generator med SSR islands via Cloudflare adapter
 - **React** — til interaktive komponenter
 - **Tailwind CSS** — styling med brand tokens (Signal Lime, Stone Black, BN Bones, Geomanist)
-- **Sanity CMS** — headless CMS til shows og site settings (valgfrit, falder tilbage til JSON)
 - **Cloudflare Pages + Workers** — hosting og API endpoints
 - **Resend** — transactional email til firmafest leads
 - **MailerLite** — newsletter subscribers
@@ -34,9 +33,7 @@ npm run dev
 
 Uden API keys kører det på placeholder JSON data (`src/data/shows.json`) og logger form submissions til konsollen.
 
-## Content management
-
-### Option A: Rediger JSON (enkelt)
+## Content
 
 Åbn `src/data/shows.json` og rediger direkte. Push til Git for at deploye.
 
@@ -55,19 +52,6 @@ Uden API keys kører det på placeholder JSON data (`src/data/shows.json`) og lo
 
 **Status options:** `upcoming`, `soldout`, `private`, `past`, `cancelled`
 
-### Option B: Sanity CMS (fleksibelt)
-
-Når du er klar til at redigere uden at rode i kode:
-
-1. Opret projekt på [sanity.io](https://sanity.io) (gratis tier rigeligt)
-2. I Sanity Studio, kopier schemas fra `sanity/schemas/` ind
-3. Sæt i `.env`:
-   ```
-   SANITY_PROJECT_ID=dit-projekt-id
-   SANITY_DATASET=production
-   ```
-4. Konfigurer webhook i Sanity til at trigge Cloudflare Pages rebuild ved ændringer
-
 ## Deploy til Cloudflare Pages
 
 ### Første gang
@@ -85,8 +69,6 @@ Når du er klar til at redigere uden at rode i kode:
    NOTIFICATION_EMAIL=kristian@kristianazzet.com
    MAILERLITE_API_KEY=...
    MAILERLITE_GROUP_ID=...
-   SANITY_PROJECT_ID=... (hvis Sanity bruges)
-   SANITY_DATASET=production
    ```
 6. Deploy
 
@@ -134,11 +116,9 @@ src/
 ├── config/
 │   └── site.ts       # Site-wide config (nav, booking info, social)
 ├── data/
-│   └── shows.json    # Placeholder data (fallback når Sanity ikke bruges)
+│   └── shows.json    # Placeholder data
 ├── layouts/
 │   └── BaseLayout.astro
-├── lib/
-│   └── sanity.ts     # Sanity client med JSON fallback
 ├── pages/
 │   ├── index.astro           # Forside
 │   ├── firmafest.astro       # Landing page (noindex)
@@ -171,7 +151,7 @@ Defineret i `tailwind.config.mjs`:
 
 ## Næste skridt
 
-- [ ] Tilføj rigtige shows til `shows.json` eller Sanity
+- [ ] Tilføj rigtige shows til `shows.json`
 - [ ] Tilføj musik-links til `src/config/site.ts`
 - [ ] Opload hero-billede til `public/images/hero-bg.jpg`
 - [ ] Opload firmafest hero-billede til `public/images/firmafest-hero.jpg`

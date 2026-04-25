@@ -1,8 +1,8 @@
 ---
 import ShowCard from './ShowCard.astro';
-import { getShows } from '../lib/sanity';
+import showsJson from '../data/shows.json';
 
-const shows = await getShows();
+const shows = showsJson as any[];
 
 const sorted = [...shows].sort(
   (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
